@@ -1,0 +1,7 @@
+{
+    "python.linting.enabled": true,
+    "workbench.colorCustomizations": {
+        "minimap.background": "#00000000",
+        "scrollbar.shadow": "#00000000"
+    }
+}

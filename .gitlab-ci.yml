@@ -1,0 +1,27 @@
+test:pylint:
+  image: python:3.8
+  script:
+    - pip install pylint --quiet
+    - pip install PyQt5
+    - pip install playsound
+    # - pylint --ignored-classes=_socketobject *.py
+    - pylint $(find . -name "*.py" | xargs)
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: on_success
+      allow_failure: true
+
+test:unit_test:
+  image: python:3.8
+  script:
+    - pip install PyQt5
+    - pip install pytest
+    # Remove database to start from a clean slate
+    - rm db.sqlite
+    # Run pytest
+    - pytest
+    # - pytest src/test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: on_success
+      allow_failure: true
